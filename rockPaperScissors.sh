@@ -84,7 +84,7 @@ function shoot {
 
 function rockPaperScissors {
 	echo -e "  Valid options are \"rock\", \"paper\", \"scissors\", or \"quit\":\n";
-	echo -e "Type your choice and press [ENTER]:\n"
+	echo -e "Type your choice and press [ENTER]:\n";
 	read userChoice;
 	shoot $userChoice;
 };
