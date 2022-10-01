@@ -2,72 +2,71 @@
 <html lang="en-us">
 	<head>
 		<script>
-function showResults(){
-	var shootChoices=document.getElementsByName('shoot');
-	var userChoice='';
-	var computerChoice=shootChoices[Math.floor(Math.random()*3)].id;
-	var resultsDiv=document.getElementById('resultsDiv');
-	for(i=0;i<shootChoices.length;i++){
-		if(shootChoices[i].checked == true){
-			userChoice=shootChoices[i].id;
-		}
-	}
-	if(userChoice==''){
-		exit();
-	}
-	var win='YOU WON';
-	var lose='YOU LOST';
-	var draw='DRAW';
-	var gameResult='';
-	switch(userChoice){
-		case 'Rock':
-			switch(computerChoice){
-				case 'Rock':
-					gameResult=draw;
-					break;
-				case 'Paper':
-					gameResult=lose;
-					break;
-				default:
-					gameResult=win;
+			function showResults(){
+				var shootChoices=document.getElementsByName('shoot');
+				var userChoice='';
+				var computerChoice=shootChoices[Math.floor(Math.random()*3)].id;
+				var resultsDiv=document.getElementById('resultsDiv');
+				for(i=0;i<shootChoices.length;i++){
+					if(shootChoices[i].checked == true){
+						userChoice=shootChoices[i].id;
+					}
+				}
+				if(userChoice==''){
+					exit();
+				}
+				var win='YOU WON';
+				var lose='YOU LOST';
+				var draw='DRAW';
+				var gameResult='';
+				switch(userChoice){
+					case 'Rock':
+						switch(computerChoice){
+							case 'Rock':
+								gameResult=draw;
+								break;
+							case 'Paper':
+								gameResult=lose;
+								break;
+							default:
+								gameResult=win;
+						}
+						break;
+					case 'Paper':
+						switch(computerChoice){
+							case 'Rock':
+								gameResult=win;
+								break;
+							case 'Paper':
+								gameResult=draw;
+								break;
+							default:
+								gameResult=lose;
+						}
+						break;
+					default:
+						switch(computerChoice){
+							case 'Rock':
+								gameResult=lose;
+								break;
+							case 'Paper':
+								gameResult=win;
+								break;
+							default:
+								gameResult=draw;
+						}
+				}
+				var resultsContent=' '+
+			'		<br />'+
+			'		You chose "'+userChoice+'".<br />'+
+			'		Computer chose "'+computerChoice+'".<br />'+
+			'		<br />'+
+			'		<hr />'+
+			'		<strong>~~~ '+gameResult+' ~~~</strong><br />'+
+			'		<br />';
+				resultsDiv.innerHTML=resultsContent;
+				document.getElementById('legend').innerHTML='Let\'s play again!';
 			}
-			break;
-		case 'Paper':
-			switch(computerChoice){
-				case 'Rock':
-					gameResult=win;
-					break;
-				case 'Paper':
-					gameResult=draw;
-					break;
-				default:
-					gameResult=lose;
-			}
-			break;
-		default:
-			switch(computerChoice){
-				case 'Rock':
-					gameResult=lose;
-					break;
-				case 'Paper':
-					gameResult=win;
-					break;
-				default:
-					gameResult=draw;
-			}
-			break;
-	}
-	var resultsContent=' '+
-'		<br />'+
-'		You chose "'+userChoice+'".<br />'+
-'		Computer chose "'+computerChoice+'".<br />'+
-'		<br />'+
-'		<hr />'+
-'		<strong>~~~ '+gameResult+' ~~~</strong><br />'+
-'		<br />';
-	resultsDiv.innerHTML=resultsContent;
-	document.getElementById('legend').innerHTML='Let\'s play again!';
-}
 		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />

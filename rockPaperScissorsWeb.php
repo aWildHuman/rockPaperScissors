@@ -128,4 +128,5 @@ rockPaperScissors($userChoice,$choicesArray);
 echo "
 	</body>
 </html>";
+
 ?>
