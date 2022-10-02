@@ -39,8 +39,8 @@ Simple rock paper scissors implementations. Each root level subdirectory is a di
 
     + `git clone https://github.com/aWildHuman/rockPaperScissors.git`
 
-      + `cd ./rockPaperScissors/rust`
+    + `cd ./rockPaperScissors/rust`
 
-      + `cargo build --release`
+    + `cargo build --release`
 
     + You will find your compiled `rock_paper_scissors` binary in `./rockPaperScissors/rust/target/release`
