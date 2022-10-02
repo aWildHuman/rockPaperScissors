@@ -1,5 +1,4 @@
 <?php
-
 $userChoice="";
 $choicesArray=array(
 	"Rock",
@@ -52,67 +51,35 @@ if(isset($_POST["shoot"])){
 		$userChoice=$_POST["shoot"];
 		$computerChoice=rand(0,2);
 		if(in_array("$userChoice",$choicesArray)){
-		$win="
-		<hr />
-		<strong>~~~ YOU WON ~~~</strong><br />
-		<br />
-		";
-		$lose="
-		<hr />
-		<strong>~~~ YOU LOST ~~~</strong><br />
-		<br />
-		";
-		$draw="
-		<hr />
-		<strong>~~~ DRAW ~~~</strong><br />
-		<br />
-		";
+			$result="YOU LOSE";
+			if($choicesArray[$computerChoice]==$userChoice){
+				$result="DRAW";
+			}
+			switch($userChoice){
+				case "Rock":
+					if($choicesArray[$computerChoice]=="Scissors"){
+						$result="YOU WON";
+					}
+				break;
+				case "Paper":
+					if($choicesArray[$computerChoice]=="Rock"){
+						$result="YOU WON";
+					}
+				break;
+				default:
+					if($choicesArray[$computerChoice]=="Paper"){
+						$result="YOU WON";
+					}
+				break;
+			}
 			echo "
 		<br />
 		You chose \"$userChoice\".<br />
 		Computer chose \"".$choicesArray[$computerChoice]."\".<br />
+		<br />
+		<hr />
+		<strong>~~~ $result ~~~</strong><br />
 		<br />";
-			switch($userChoice){
-				case "Rock":
-					switch($computerChoice){
-						case 0:
-							echo "$draw";
-						break;
-						case 1:
-							echo "$lose";
-						break;
-						default:
-							echo "$win";
-						break;
-					}
-				break;
-				case "Paper":
-					switch($computerChoice){
-						case 0:
-							echo "$win";
-						break;
-						case 1:
-							echo "$draw";
-						break;
-						default:
-							echo "$lose";
-						break;
-					}
-				break;
-				default:
-					switch($computerChoice){
-						case 0:
-							echo "$lose";
-						break;
-						case 1:
-							echo "$win";
-						break;
-						default:
-							echo "$draw";
-						break;
-					}
-				break;
-			}
 		}else{
 			echo "
 		\"$userChoice\" is not a valid option<br />
@@ -124,9 +91,7 @@ if(isset($_POST["shoot"])){
 	}
 }
 rockPaperScissors($userChoice,$choicesArray);
-
 echo "
 	</body>
 </html>";
-
 ?>

@@ -11,74 +11,57 @@ function shoot {
 	header;
 	userChoice="$1";
 	computerChoice=$[ $RANDOM % 3 + 1 ];
-	#1 rock
-	#2 paper
-	#3 scissors
 	if [ -z $userChoice ]; then
-		echo -e "  You typed nothing...";
+		echo -e "  You typed nothing...\n\n";
 	else
-		case $userChoice in
-			"quit")
-				echo -e "  Thanks for playing, goodbye!\n\n";
-				exit;
+		if [ $userChoice == "quit" ]; then
+			echo -e "\n\n\n\n\n\n\n\n\n  Thanks for playing, goodbye!\n\n";
+			exit;
+		fi
+		case $computerChoice in
+			1)
+				computerChoiceText="rock";
 				;;
-			"rock")
-				echo -e "  You chose \"rock\".";
-				case $computerChoice in
-					1)
-						echo -e "  Computer chose \"rock\".\n";
-						echo -e "  ~~~ DRAW ~~~\n";
-						;;
-					2)
-						echo -e "  Computer chose \"paper\".\n";
-						echo -e "  ~~~ YOU LOST ~~~\n";
-						;;
-					*)
-						echo -e "  Computer chose \"scissors\".\n";
-						echo -e "  ~~~ YOU WON ~~~\n";
-						;;
-				esac
-				;;
-			"paper")
-				echo -e "  You chose \"paper\".";
-				case $computerChoice in
-					1)
-						echo -e "  Computer chose \"rock\".\n";
-						echo -e "  ~~~ YOU WON ~~~\n";
-						;;
-					2)
-						echo -e "  Computer chose \"paper\".\n";
-						echo -e "  ~~~ DRAW ~~~\n";
-						;;
-					*)
-						echo -e "  Computer chose \"scissors\".\n";
-						echo -e "  ~~~ YOU LOST ~~~\n";
-						;;
-				esac
-				;;
-			"scissors")
-				echo -e "  You chose \"scissors\".";
-				case $computerChoice in
-					1)
-						echo -e "  Computer chose \"rock\".\n";
-						echo -e "  ~~~ YOU LOST ~~~\n";
-						;;
-					2)
-						echo -e "  Computer chose \"paper\".\n";
-						echo -e "  ~~~ YOU WON ~~~\n";
-						;;
-					*)
-						echo -e "  Computer chose \"scissors\".\n";
-						echo -e "  ~~~ DRAW ~~~\n";
-						;;
-				esac
+			2)
+				computerChoiceText="paper";
 				;;
 			*)
-				echo -e "  \"$userChoice\" is not a valid option.\n\n";
+				computerChoiceText="scissors";
 				;;
 		esac
+		result="YOU LOST";
+		if [ $computerChoiceText == $userChoice ]; then
+			result="DRAW";
+		else
+			case $userChoice in
+				"rock")
+					if [ $computerChoiceText == "scissors" ]; then
+						result="YOU WON";
+					fi
+					;;
+				"paper")
+					if [ $computerChoiceText == "rock" ]; then
+						result="YOU WON";
+					fi
+					;;
+				"scissors")
+					if [ $computerChoiceText == "paper" ]; then
+						result="YOU WON";
+					fi
+					;;
+				*)
+					echo -e "\n  \"$userChoice\" is not a valid option.\n\n\n\n";
+						result="INVALID";
+					;;
+			esac
+		fi
+		if [ "$result" != "INVALID" ]; then
+			echo -e "  You chose \"$userChoice\".\n";
+			echo -e "  Computer chose \"$computerChoiceText\".\n";
+			echo -e "  ~~~$result~~~\n";
+		fi
 	fi
-	echo -e "  Let's try again\n";
+	echo -e "  Let's try again!\n";
 	rockPaperScissors;
 };
 
@@ -90,5 +73,5 @@ function rockPaperScissors {
 };
 
 header;
+echo -e "\n\n\n\n\n\n  Let's play!\n";
 rockPaperScissors;
-
