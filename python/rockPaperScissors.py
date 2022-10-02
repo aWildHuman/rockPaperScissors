@@ -18,51 +18,42 @@ def shoot(user_choice):
 	#2 paper
 	#3 scissors
 	if user_choice == '':
-		print("  You typed nothing...")
+		print("\n  You typed nothing...\n")
 	else:
-		match user_choice:
-			case "quit":
-				print("  Thanks for playing, goodbye!\n\n")
-				sys.exit()
-			case "rock":
-				print("  You chose \"rock\"")
-				match computer_choice:
-					case 1:
-						print("  Computer chose \"rock\"\n")
-						print("  ~~~ DRAW ~~~\n")
-					case 2:
-						print("  Computer chose \"paper\"\n")
-						print("  ~~~ YOU LOST ~~~\n")
-					case _:
-						print("  Computer chose \"scissors\"\n")
-						print("  ~~~ YOU WON ~~~\n")
-			case "paper":
-				print("  You chose \"paper\"")
-				match computer_choice:
-					case 1:
-						print("  Computer chose \"rock\"\n")
-						print("  ~~~ YOU WON ~~~\n")
-					case 2:
-						print("  Computer chose \"paper\"\n")
-						print("  ~~~ DRAW ~~~\n")
-					case _:
-						print("  Computer chose \"scissors\"\n")
-						print("  ~~~ YOU LOST ~~~\n")
-			case "scissors":
-				print("  You chose \"scissors\"")
-				match computer_choice:
-					case 1:
-						print("  Computer chose \"rock\"\n")
-						print("  ~~~ YOU LOST ~~~\n")
-					case 2:
-						print("  Computer chose \"paper\"\n")
-						print("  ~~~ YOU WON ~~~\n")
-					case _:
-						print("  Computer chose \"scissors\"\n")
-						print("  ~~~ DRAW ~~~\n")
+		if user_choice == 'quit':
+			print("  Thanks for playing, goodbye!\n\n")
+			sys.exit()
+		match computer_choice:
+			case 1:
+				computer_choice_text="rock"
+			case 2:
+				computer_choice_text="paper"
 			case _:
-				print("  \""+user_choice+"\" is not a valid option.\n\n")
-	print("  Let's try again\n")
+				computer_choice_text="scissors"
+		result="YOU LOST"
+		if computer_choice_text == user_choice:
+			result="DRAW"
+		else:
+			match user_choice:
+				case "rock":
+					if computer_choice_text == "scissors":
+						result="YOU WON"
+				
+				case "paper":
+					if computer_choice_text == "rock":
+						result="YOU WON"
+				
+				case "scissors":
+					if computer_choice_text == "paper":
+						result="YOU WON"
+				case _:
+					print("  \""+user_choice+"\" is not a valid option.\n\n")
+					result="INVALID"
+		if result != "INVALID":
+			print("  You chose \""+user_choice+"\"")
+			print("  Computer chose \""+computer_choice_text+"\"")
+			print("  ~~~"+result+"~~~")
+	print("  Let's try again!\n")
 	rockPaperScissors()
 
 def rockPaperScissors():
@@ -71,5 +62,5 @@ def rockPaperScissors():
 	shoot(user_choice)
 
 header()
+print("  Let's play!\n")
 rockPaperScissors()
-

@@ -15,55 +15,43 @@
 				if(userChoice==''){
 					exit();
 				}
-				var win='YOU WON';
-				var lose='YOU LOST';
-				var draw='DRAW';
-				var gameResult='';
+				var gameResult='YOU LOST';
+				if(computerChoice == userChoice){
+					gameResult='DRAW';
+				}
 				switch(userChoice){
 					case 'Rock':
-						switch(computerChoice){
-							case 'Rock':
-								gameResult=draw;
-								break;
-							case 'Paper':
-								gameResult=lose;
-								break;
-							default:
-								gameResult=win;
+						if(computerChoice == "Scissors"){
+							gameResult="YOU WON";
 						}
 						break;
 					case 'Paper':
-						switch(computerChoice){
-							case 'Rock':
-								gameResult=win;
-								break;
-							case 'Paper':
-								gameResult=draw;
-								break;
-							default:
-								gameResult=lose;
+						if(computerChoice == "Rock"){
+							gameResult="YOU WON";
+						}
+						break;
+					case 'Scissors':
+						if(computerChoice == "Paper"){
+							gameResult="YOU WON";
 						}
 						break;
 					default:
-						switch(computerChoice){
-							case 'Rock':
-								gameResult=lose;
-								break;
-							case 'Paper':
-								gameResult=win;
-								break;
-							default:
-								gameResult=draw;
-						}
+						gameResult="INVALID";
 				}
-				var resultsContent=' '+
-			'		<br />'+
-			'		You chose "'+userChoice+'".<br />'+
-			'		Computer chose "'+computerChoice+'".<br />'+
-			'		<br />'+
-			'		<hr />'+
-			'		<strong>~~~ '+gameResult+' ~~~</strong><br />'+
-			'		<br />';
+				var resultsContent=''+
+					'		<br />&nbsp;<br />&nbsp;<br />'+
+							'"'+userChoice+'" is not a valid option.<hr />'+
+							'<br />&nbsp;<br />';
+				if(gameResult != "INVALID"){
+					var resultsContent=''+
+					'		<br />'+
+					'		You chose "'+userChoice+'".<br />'+
+					'		Computer chose "'+computerChoice+'".<br />'+
+					'		<br />'+
+					'		<hr />'+
+					'		<strong>~~~ '+gameResult+' ~~~</strong><br />'+
+					'		<br />';
+				}
 				resultsDiv.innerHTML=resultsContent;
 				document.getElementById('legend').innerHTML='Let\'s play again!';
 			}
